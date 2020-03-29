@@ -11,6 +11,8 @@ use App\Http\Requests\API\PlayerRequest;
 
 use App\Http\Resources\API\PlayerResource;
 
+use App\Http\Resources\API\PlayerListResource;
+
 class Players extends Controller
 {
     /**
@@ -20,8 +22,7 @@ class Players extends Controller
      */
     public function index()
     {
-    // get all the articles
-    return Player::all();
+        return PlayerListResource::collection(Player::all());
     }
 
     /**
@@ -34,7 +35,9 @@ class Players extends Controller
     {
         $data = $request->all();
 
-        return Player::create($data);
+        $player = Player::create($data);
+
+        return new PlayerResource($player);
     }
 
     /**
@@ -45,9 +48,7 @@ class Players extends Controller
      */
     public function show(Player $player)
     {
-        return $player;
-        
-
+        return new PlayerResource($player);
     }
     /**
      * Update the specified resource in storage.
@@ -58,11 +59,15 @@ class Players extends Controller
      */
     public function update(PlayerRequest $request, Player $player)
     {
+        $player = Player::find($id);
+
         $data = $request->all();
 
         $player->fill($data)->save();
     
-        return $player;
+        return new PlayerResource($player);
+
+         
     }
 
     /**
@@ -77,5 +82,4 @@ class Players extends Controller
         return response(null, 204);
     }
 }
-
 
