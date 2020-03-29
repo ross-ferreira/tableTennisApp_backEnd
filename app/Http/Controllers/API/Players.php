@@ -39,11 +39,11 @@ class Players extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Player $player)
     {
+        return $player;
 
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -66,9 +66,10 @@ class Players extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Player $player)
     {
-        //
+        $player->delete();
+        return response(null, 204);
     }
 }
 
