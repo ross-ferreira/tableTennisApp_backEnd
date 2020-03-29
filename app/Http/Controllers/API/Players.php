@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Player;
 
+use App\Http\Requests\API\PlayerRequest;
+
+use App\Http\Resources\API\PlayerResource;
+
 class Players extends Controller
 {
     /**
@@ -42,6 +46,7 @@ class Players extends Controller
     public function show(Player $player)
     {
         return $player;
+        
 
     }
     /**
@@ -72,4 +77,5 @@ class Players extends Controller
         return response(null, 204);
     }
 }
+
 

@@ -41,7 +41,8 @@ Route::group(["prefix" => "players"], function () {
         Route::delete("", [Players::class, "destroy"]);
     });
 
-}
+});
+
 
 
 
