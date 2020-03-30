@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Players;
+use App\Http\Controllers\API\Leagues;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,24 @@ Route::group(["prefix" => "players"], function () {
         Route::put("", [Players::class, "update"]);
 
         Route::delete("", [Players::class, "destroy"]);
+    });
+
+});
+
+Route::group(["prefix" => "leagues"], function () {
+    // GET /articles: show all articles
+    Route::get("", [Leagues::class, "index"]);
+    // POST /articles: create a new article
+    Route::post("", [Leagues::class, "store"]);
+
+
+    Route::group(["prefix" => "{league}"], function () {
+        
+        Route::get("", [Leagues::class, "show"]);
+
+        Route::put("", [Leagues::class, "update"]);
+
+        Route::delete("", [Leagues::class, "destroy"]);
     });
 
 });
